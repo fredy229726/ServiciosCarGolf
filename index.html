@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: large;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/originals/f2/56/fa/f256fa53f4a71faeafdc7d83ece05548.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        #logo img {
+            width: auto;
+            height: 160px;
+        }
+        .show-password {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .show-password input {
+            width: auto;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header id="logo">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgSPf8yMp8n6NhcOcLu8sSnmuXQcdhBs5I2gGUnM6iyAUh--bRhqXjLt_AUfiC1959Icau_h34XV-3_vzIWpKox9SLQAUUZ11qPAjpcoP8aPxtooxuHqc795JTAU4Jq61oUlRl28hYVcYD0Ce7X27QpRFLFUB75tlqcLVaev_C6UeMbg5n6rOuPd8e72pfq" alt="cargolf">
+    </header>
+    <h2>Iniciar Sesión</h2>
+    <input type="email" id="email" placeholder="Correo electrónico" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+
+    <div class="show-password">
+        <input type="checkbox" id="togglePassword"> <label for="togglePassword">Mostrar contraseña</label>
+    </div>
+
+    <button onclick="login()">Iniciar Sesión</button>
+    <p>¿No tienes cuenta? <a href="index3.html">Regístrate</a></p>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyASCARStuc8QcI1TrEn24koqpQOXBzIYJ0",
+        authDomain: "miprimerproyecto-d5602.firebaseapp.com",
+        projectId: "miprimerproyecto-d5602",
+        storageBucket: "miprimerproyecto-d5602.appspot.com", // Corrección aquí
+        messagingSenderId: "1039478012172",
+        appId: "1:1039478012172:web:69aef8813b07d21e8ab129",
+        measurementId: "G-TMMED788TT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = function() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Inicio de sesión exitoso.");
+                window.location.href = "index1.html";
+            })
+            .catch((error) => {
+                alert("Error al iniciar sesión: " + error.message);
+            });
+    };
+
+    // Mostrar/Ocultar contraseña
+    document.getElementById("togglePassword").addEventListener("change", function () {
+        const password = document.getElementById("password");
+        password.type = this.checked ? "text" : "password";
+    });
+</script>
+
+</body>
+</html>

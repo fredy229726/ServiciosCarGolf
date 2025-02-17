@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CarGolf</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <script type="text/javascript"> emailjs.init('7srjC1uhHZCJcAv9E')</script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header id="logo">    
+            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgSPf8yMp8n6NhcOcLu8sSnmuXQcdhBs5I2gGUnM6iyAUh--bRhqXjLt_AUfiC1959Icau_h34XV-3_vzIWpKox9SLQAUUZ11qPAjpcoP8aPxtooxuHqc795JTAU4Jq61oUlRl28hYVcYD0Ce7X27QpRFLFUB75tlqcLVaev_C6UeMbg5n6rOuPd8e72pfq" alt="cargolf">
+            <div>
+                <h1 style="color: red; font-size: 60px;"></h1>
+                <nav>
+                    <ul>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            <section class="informacion">
+                <div class="logo-equipo">
+                    <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgSPf8yMp8n6NhcOcLu8sSnmuXQcdhBs5I2gGUnM6iyAUh--bRhqXjLt_AUfiC1959Icau_h34XV-3_vzIWpKox9SLQAUUZ11qPAjpcoP8aPxtooxuHqc795JTAU4Jq61oUlRl28hYVcYD0Ce7X27QpRFLFUB75tlqcLVaev_C6UeMbg5n6rOuPd8e72pfq" alt="cargolf">
+                </div>
+                <div class="container">
+                    <h1>¡Bienvenido a CarGolf!</h1><br>
+
+                    <details>
+                        <summary>Origen</summary>
+                        <p>Micro Empresa fundada en 2025 bajo el nombre de CarGolf con funcionamiento activo desde 2015.</p><br>
+                    </details>
+
+                    <details>
+                        <summary>¿A qué nos dedicamos?</summary>
+                        <p>Reparaciones menores a carritos de golf, trabajos sencillos de soldadura y de tapiceria.</p>
+                    </details>
+                    
+                </div>
+            </section>
+            <section>
+                <h1>Pregunta o cotiza sin compromiso</h1><br>
+                <form id="form">
+                    <div class="field">
+                      <label for="nombre">Nombre</label>
+                      <input type="text" name="nombre" id="nombre">
+                    </div>
+                    <div class="field">
+                      <label for="correo">Correo electronico</label>
+                      <input type="email" name="correo" id="correo">
+                    </div>
+                    <div class="field">
+                      <label for="numero">Numero de celular</label>
+                      <input type="tel" name="numero" id="numero">
+                    </div>
+                    <div class="field">
+                      <label for="horario">¿En que hora se le puede contactar?</label>
+                      <input type="time" name="horario" id="horario">
+                    </div>
+                    <div class="field">
+                      <label for="comentarios">Comentarios</label>
+                      <input type="text" name="comentarios" id="comentarios">
+                    </div>
+                  
+                    <input type="submit" class="boton-carrito" id="button" value="" >
+                  </form>
+            </section>
+            <section>
+                <h1>Información sobre pagos, tarifas y/o refacciones</h1>
+                <h3>Pagos</h3>
+                <p>De momento solo aceptamos efectivo en el local y transferencias</p>
+                <h3>Tarifas</h3>
+                <p>Se le dará el precio cuando cotice el servicio requerido, siempre con el 50% de anticipo para costo de material</p>
+                <h3>Refacciones</h3>
+                <p>Nosotros siempre usamos refacciones nuevas sobre pedido, pero, si el cliente desea conseguir refacciones de segunda mano para reducir costos será bajo su consideración</p>
+                <br>
+                <br>
+                <div style="text-align: center;">
+                    <button onclick="window.location.href='index2.html'" style="--clr: #0FF0FC"><span>Calificanos</span><i></i></button>
+                </div><br>
+                <div style="text-align: center;">
+                    <button onclick="logout()" style="--clr: #39FF14"><span>Cerrar Sesión</span><i></i></button>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>Contactanos en: <a href=""><i class="fa fa-facebook-square" id="facebook"></i></a></p>
+        </footer>
+
+        <script type="module">
+            // Importar las funciones de Firebase
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+            import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
+            import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
+            
+            // Configuración de Firebase
+            const firebaseConfig = {
+                apiKey: "AIzaSyASCARStuc8QcI1TrEn24koqpQOXBzIYJ0",
+                authDomain: "miprimerproyecto-d5602.firebaseapp.com",
+                projectId: "miprimerproyecto-d5602",
+                storageBucket: "miprimerproyecto-d5602.appspot.com",
+                messagingSenderId: "1039478012172",
+                appId: "1:1039478012172:web:69aef8813b07d21e8ab129",
+                measurementId: "G-TMMED788TT"
+            };
+        
+            // Inicializar Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+            const auth = getAuth();
+        
+            // Verificar el estado de la autenticación (iniciar sesión o no)
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // Usuario está autenticado
+                    console.log("Usuario autenticado:", user.email);
+                } else {
+                    // Usuario no está autenticado, redirigir al login
+                    console.log("No hay usuario autenticado");
+                    window.location.href = "login.html";
+                }
+            });
+        
+            // Cerrar sesión
+            function logout() {
+                signOut(auth).then(() => {
+                    console.log("Sesión cerrada con éxito");
+                    window.location.href = "index.html"; // Redirigir al login
+                }).catch((error) => {
+                    console.error("Error al cerrar sesión:", error);
+                });
+            }
+        
+            // Enviar datos del formulario
+            const btn = document.getElementById('button');
+        
+            document.getElementById('form').addEventListener('submit', async function(event) {
+                event.preventDefault();
+        
+                btn.value = 'Enviando...';
+        
+                const nombre = document.getElementById('nombre').value;
+                const correo = document.getElementById('correo').value;
+                const numero = document.getElementById('numero').value;
+                const horario = document.getElementById('horario').value;
+                const comentarios = document.getElementById('comentarios').value;
+        
+                try {
+                    // Guardar en Firestore
+                    const docRef = await addDoc(collection(db, "formularios"), {
+                        nombre,
+                        correo,
+                        numero,
+                        horario,
+                        comentarios,
+                        fecha: new Date()
+                    });
+                    console.log("Documento guardado con ID:", docRef.id);
+        
+                    // Enviar correo con EmailJS
+                    const serviceID = 'default_service';
+                    const templateID = 'template_9c24jbl';
+        
+                    await emailjs.sendForm(serviceID, templateID, this);
+                    alert('¡Formulario Enviado con éxito!');
+                } catch (error) {
+                    console.error("Error al enviar el formulario:", error);
+                    alert('Hubo un error. Intenta de nuevo.');
+                } finally {
+                    btn.value = 'Enviar';
+                    this.reset(); // Limpia el formulario después de enviarlo
+                }
+            });
+        </script>
+        
+        
+    </body>
+</html>

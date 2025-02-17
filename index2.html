@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Interés Simple</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript"> emailjs.init('UOPE7-bdsurlv4D_7')</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: large;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://i.pinimg.com/originals/f2/56/fa/f256fa53f4a71faeafdc7d83ece05548.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .field label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .field input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #calculateBtn {
+            width: 100%;
+            padding: 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #calculateBtn:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        footer{
+            color: white;
+            text-align: center;
+            padding: 1%;
+            bottom: 0;
+            width: 100%;
+            position: static;
+        }
+
+        #twitter, #facebook{
+            font-size: 2em;
+            background-color: #18191f;
+            color: #fff;
+            box-shadow: 2px 2px 2px #00000080, 10px 1px 12px #00000080, 2px 2px 10px #00000080, 2px 2px 3px #00000080, inset 2px 2px 10px #00000080, inset 2px 2px 10px #00000080, inset 2px 2px 10px #00000080, inset 2px 2px 10px #00000080;
+            border-radius: 29px;
+            padding: 11px 19px;
+            margin: 0 40px;
+            animation: animate 3s linear infinite;
+            text-shadow: 0 0 50px #0072ff, 0 0 100px #0072ff, 0 0 150px #0072ff, 0 0 200px #0072ff;
+        }
+
+        #facebook{
+            animation-delay: 0.7s;
+        }
+
+        @keyframes animate{
+            from {
+
+                filter: hue-rotate(0deg);
+            }
+            to {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        #logo {
+            flex: 1;
+            text-align: center;
+            position: static;
+        }
+
+        #logo img {
+            width: auto;
+            height: 160px;
+        }
+
+        .rating {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+            display: flex;
+            justify-content: left;
+        }
+
+        .rating input[type="radio"] {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .rating input[type="radio"]:checked ~ label {
+            color: #ffc107;
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: #ffc107;
+        }
+
+        input[type="submit"] {
+            display: block;
+            padding: 6px 30px;
+            font-size: 14px;
+            background-color: #4460AA;
+            color: #fff;
+            border: none
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 2%;
+            transition: transform 0.3s ease; 
+            color: #444;
+        }
+
+        nav ul li a {
+            color: blue;
+            text-decoration: none;
+            transition: color 0.3s ease; 
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header id="logo">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgSPf8yMp8n6NhcOcLu8sSnmuXQcdhBs5I2gGUnM6iyAUh--bRhqXjLt_AUfiC1959Icau_h34XV-3_vzIWpKox9SLQAUUZ11qPAjpcoP8aPxtooxuHqc795JTAU4Jq61oUlRl28hYVcYD0Ce7X27QpRFLFUB75tlqcLVaev_C6UeMbg5n6rOuPd8e72pfq" alt="cargolf">
+    </header>
+    <form id="form">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input type="text" name="nombre" id="nombre">
+        </div>
+        <div class="field">
+          <label for="comentario">Comentario</label>
+          <input type="text" name="comentario" id="comentario">
+        </div>
+        <div class="field">
+          <label for="calificacion">Calificacion</label>
+          <div class="rating">
+            <input type="radio" name="calificacion" id="star5" value="5">
+            <label for="star5" title="5 estrellas">&#9733;</label>
+            <input type="radio" name="calificacion" id="star4" value="4">
+            <label for="star4" title="4 estrellas">&#9733;</label>
+            <input type="radio" name="calificacion" id="star3" value="3">
+            <label for="star3" title="3 estrellas">&#9733;</label>
+            <input type="radio" name="calificacion" id="star2" value="2">
+            <label for="star2" title="2 estrellas">&#9733;</label>
+            <input type="radio" name="calificacion" id="star1" value="1">
+            <label for="star1" title="1 estrella">&#9733;</label>
+         </div>
+        </div>
+      
+        <input type="submit" id="button" value="Calificar" >
+    </form>
+    <br>
+    <br>
+    <nav>
+        <ul>
+            <li><a href="index.html">Volver al inicio</a></li>
+        </ul>
+    </nav>
+</div>
+
+<script type="module">
+    // Importar las funciones de Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-firestore.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-auth.js";
+
+    // Configuración de Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyASCARStuc8QcI1TrEn24koqpQOXBzIYJ0",
+        authDomain: "miprimerproyecto-d5602.firebaseapp.com",
+        projectId: "miprimerproyecto-d5602",
+        storageBucket: "miprimerproyecto-d5602.appspot.com", // Corrección aquí
+        messagingSenderId: "1039478012172",
+        appId: "1:1039478012172:web:69aef8813b07d21e8ab129",
+        measurementId: "G-TMMED788TT"
+    };
+
+    // Inicializar Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // Usuario está autenticado
+            console.log("Usuario autenticado:", user.email);
+        } else {
+            // Usuario no está autenticado, redirigir al login
+            console.log("No hay usuario autenticado");
+            window.location.href = "login.html";
+        }
+    });
+
+    // Enviar datos del formulario
+    const btn = document.getElementById('button');
+
+    document.getElementById('form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        btn.value = 'Enviando...';
+
+        const nombre = document.getElementById('nombre').value;
+        const comentario = document.getElementById('comentario').value;
+        // Obtener la calificación seleccionada
+        let calificacion = '';
+        const radios = document.getElementsByName('calificacion');
+        for (const radio of radios) {
+            if (radio.checked) {
+                calificacion = radio.value; // Obtiene el valor de la estrella seleccionada
+                break;
+            }
+        }
+
+
+        try {
+            // Guardar en Firestore
+            const docRef = await addDoc(collection(db, "reseñas"), {
+                nombre,
+                comentario,
+                calificacion,
+                fecha: new Date()
+            });
+            console.log("Documento guardado con ID:", docRef.id);
+
+            // Enviar correo con EmailJS
+            const serviceID = 'default_service';
+            const templateID = 'template_x1qvbfq';
+
+            await emailjs.sendForm(serviceID, templateID, this);
+            alert('¡Formulario Enviado con éxito!');
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+            alert('Hubo un error. Intenta de nuevo.');
+        } finally {
+            btn.value = 'Enviar';
+            this.reset(); // Limpia el formulario después de enviarlo
+        }
+    });
+</script>
+
+</body>
+</html>
