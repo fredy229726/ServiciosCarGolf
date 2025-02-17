@@ -380,6 +380,15 @@ details[open] summary {
             width: auto;
             height: 90px;
         }
+        
+        .información{
+            display: ;
+        }
+
+        .container{
+            width: 100%;
+            height: 100%;
+        }
     }
 
     /* Estilos para pantallas de entre 601 y 1200 píxeles de ancho */
