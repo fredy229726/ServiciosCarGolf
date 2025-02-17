@@ -78,7 +78,11 @@
                 <br>
                 <br>
                 <div style="text-align: center;">
-                    <button onclick="window.location.href='index2.html'" style="--clr: #0FF0FC"><span>Calificanos</span><i></i></button>
+                    <button onclick="window.location.href='index2.html'" style="--clr: #0FF0FC"><span>Calificanos</span><i></i></button>
+                </div><br>
+                <div style="text-align: center;">
+                    <button id="logoutBtn" onclick="logout()" style="--clr: #39FF14"><span>Cerrar Sesión</span><i></i></button>
+                </div>
             </section>
         </main>
         <footer>
@@ -119,15 +123,18 @@
                 }
             });
         
-            // Cerrar sesión
+            // Función para cerrar sesión
             function logout() {
                 signOut(auth).then(() => {
-                    console.log("Sesión cerrada con éxito");
-                    window.location.href = "index.html"; // Redirigir al login
+                    // Redirigir al login después de cerrar sesión
+                    window.location.href = "index.html"; // Cambia el nombre según tu archivo de login
                 }).catch((error) => {
                     console.error("Error al cerrar sesión:", error);
                 });
             }
+
+            // Asociar el evento de click al botón de logout
+            document.getElementById('logoutBtn').addEventListener('click', logout);
         
             // Enviar datos del formulario
             const btn = document.getElementById('button');
